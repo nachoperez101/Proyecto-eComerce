@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/signin.css">
   <style>
     body {
       background-color: rgb(248, 249, 250);
@@ -17,12 +18,22 @@
 </head>
 
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+  <main class="form-signin text-center" >
+    <form action="main-page.html">
+      <img class="mb-4" src="img/login.png" alt="" width="100%" height="">
+      <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
+  
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+        <label for="floatingInput">Email</label>
       </div>
-    </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+        <label for="floatingPassword">Contraseña</label>
+      </div>
+      
+      <button class="w-50 btn btn-lg btn-primary" type="submit">Ingresar</button>
+    </form>
   </main>
   <footer class="text-muted">
     <div class="container">
