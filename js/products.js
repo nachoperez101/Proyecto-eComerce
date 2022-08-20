@@ -1,8 +1,7 @@
-//array donde se cargarán los datos recibidos:
 let productsArray = [];
 const URL_Products = 'https://japceibal.github.io/emercado-api/cats_products/101.json'
 
-//función que recibe un array con los datos, y los muestra en pantalla a través el uso del DOM
+//función que recibe un array con los datos, y los muestra en pantalla
 function showProductList(array){
     let htmlContentToAppend = "";
 
@@ -32,14 +31,6 @@ function showProductList(array){
 }
 
 
-/* 
-EJECUCIÓN:
-
--Al cargar la página se llama a getJSONData() pasándole por parámetro la dirección para obtener el listado.
--Se verifica el estado del objeto que devuelve, y, si es correcto, se cargan los datos en categoriesArray.
--Por último, se llama a showCategoriesList() pasándole por parámetro categoriesArray.
-
-*/
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(URL_Products).then(function(resultObj){
