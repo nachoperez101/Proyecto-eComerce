@@ -1,5 +1,5 @@
 let productsArray = [];
-const URL_Products = 'https://japceibal.github.io/emercado-api/cats_products/101.json'
+const URL_Products = PRODUCTS_URL + localStorage.getItem('catID') + '.json'
 
 //función que recibe un array con los datos, y los muestra en pantalla
 function showProductList(array){
