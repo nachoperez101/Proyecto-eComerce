@@ -41,3 +41,5 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 });
+
+document.getElementById('usuario').innerHTML = localStorage.getItem('usuario')
