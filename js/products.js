@@ -5,6 +5,7 @@ let productsArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
+let clave = ''
 const URL_Products = PRODUCTS_URL + localStorage.getItem('catID') + '.json'
 
 
@@ -48,7 +49,9 @@ function showProductList(){
         let prod = CurrentProdArray[i];
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(prod.cost) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(prod.cost) <= maxCount))){
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(prod.cost) <= maxCount)) &&
+            ((clave == '') || (prod.name.toLowerCase().includes(clave.toLowerCase())) || 
+             (prod.description.toLowerCase().includes(clave.toLowerCase())))) {
 
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action">
@@ -64,7 +67,6 @@ function showProductList(){
                             </div>
                             <small class="text-muted">` + prod.soldCount + ` vendidos</small> 
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -148,5 +150,10 @@ document.addEventListener("DOMContentLoaded", function(e){
         showProductList();
     });
 });
+
+document.getElementById('searchbar').addEventListener('input', function () {
+    clave = document.getElementById('searchbar').value;
+    showProductList();
+})
 
 document.getElementById('usuario').innerHTML = localStorage.getItem('usuario')
