@@ -3,53 +3,53 @@ const ORDER_DESC_BY_PRICE = "ZA";
 const ORDER_BY_REL = "Cant.";
 let productsArray = [];
 let currentSortCriteria = undefined;
-let minCount = undefined;
-let maxCount = undefined;
+let minCount = '';
+let maxCount = '';
 let clave = ''
 const URL_Products = PRODUCTS_URL + localStorage.getItem('catID') + '.json'
 
+// Mostrar usuario en la esquina superior derecha
+document.getElementById('usuario').innerHTML = localStorage.getItem('usuario')
 
 
+
+// Funcion que ordena el array segun el criterio que haya (ascendente o descendente por precio, o por relevancia)
 function sortProducts(criteria, array){
     let result = [];
-    if (criteria === ORDER_ASC_BY_PRICE)
-    {
-        result = array.sort(function(a, b) {
-            if ( a.cost < b.cost ){ return -1; }
-            if ( a.cost > b.cost ){ return 1; }
-            return 0;
-        });
-    }else if (criteria === ORDER_DESC_BY_PRICE){
-        result = array.sort(function(a, b) {
-            if ( a.cost > b.cost ){ return -1; }
-            if ( a.cost < b.cost ){ return 1; }
-            return 0;
-        });
-    }else if (criteria === ORDER_BY_REL){
-        result = array.sort(function(a, b) {
-            let aCount = parseInt(a.soldCount);
-            let bCount = parseInt(b.soldCount);
 
-            if ( aCount > bCount ){ return -1; }
-            if ( aCount < bCount ){ return 1; }
-            return 0;
-        });
+    switch (criteria) {
+        case ORDER_ASC_BY_PRICE:
+            result = array.sort(function (a,b) {
+                return a.cost - b.cost;
+            })
+            break;
+    
+        case ORDER_DESC_BY_PRICE:
+            result = array.sort(function (a,b) {
+                return b.cost - a.cost;
+            })
+            break;
+        
+        case ORDER_BY_REL:
+            result = array.sort(function (a,b) {
+                return b.soldCount - a.soldCount;
+            })
+            break
     }
-
+    
     return result;
 }
 
 
 
-
+// Funcion que selecciona y muestra solo aquellos productos del array que contienen la clave y estan dentro de los limites
 function showProductList(){
     let htmlContentToAppend = "";
 
     for(let i = 0; i < CurrentProdArray.length; i++){ 
         let prod = CurrentProdArray[i];
 
-        if (((minCount == undefined) || (minCount != undefined && parseInt(prod.cost) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(prod.cost) <= maxCount)) &&
+        if (((minCount == '') || (prod.cost >= minCount)) && ((maxCount == '') || (prod.cost <= maxCount)) &&
             ((clave == '') || (prod.name.toLowerCase().includes(clave.toLowerCase())) || 
              (prod.description.toLowerCase().includes(clave.toLowerCase())))) {
 
@@ -79,7 +79,7 @@ function showProductList(){
 
 
 
-
+// Ordena el array y lo imprime
 function sortAndShowProducts(sortCriteria, productsArray){
     currentSortCriteria = sortCriteria;
 
@@ -118,42 +118,33 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
+
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
-
-        minCount = undefined;
-        maxCount = undefined;
 
         showProductList();
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
-        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-        //de productos por categoría.
         minCount = document.getElementById("rangeFilterCountMin").value;
         maxCount = document.getElementById("rangeFilterCountMax").value;
 
-        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
+        if (minCount != ""){
             minCount = parseInt(minCount);
         }
-        else{
-            minCount = undefined;
-        }
-
-        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
+        
+        if (maxCount != ""){
             maxCount = parseInt(maxCount);
         }
-        else{
-            maxCount = undefined;
-        }
-
+        
         showProductList();
     });
+
+    document.getElementById('searchbar').addEventListener('input', function () {
+        clave = document.getElementById('searchbar').value;
+        showProductList();
+    })
 });
 
-document.getElementById('searchbar').addEventListener('input', function () {
-    clave = document.getElementById('searchbar').value;
-    showProductList();
-})
 
-document.getElementById('usuario').innerHTML = localStorage.getItem('usuario')
+
