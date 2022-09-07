@@ -6,6 +6,7 @@ let currentSortCriteria = undefined;
 let minCount = '';
 let maxCount = '';
 let clave = ''
+let catname = ''
 const URL_Products = PRODUCTS_URL + localStorage.getItem('catID') + '.json'
 
 // Mostrar usuario en la esquina superior derecha
@@ -74,6 +75,7 @@ function showProductList(){
         }
     }
     document.getElementById("cat-list-container").innerHTML = htmlContentToAppend; 
+    document.getElementById('titulo').innerHTML = catname;
 }
 
 
@@ -96,11 +98,13 @@ function sortAndShowProducts(sortCriteria, productsArray){
 
 
 
+
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(URL_Products).then(function(resultObj){
         if (resultObj.status === "ok")
         {
             CurrentProdArray = resultObj.data.products;
+            catname = resultObj.data.catName
             showProductList();
         }
     });
@@ -144,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         clave = document.getElementById('searchbar').value;
         showProductList();
     })
+
 });
 
 
