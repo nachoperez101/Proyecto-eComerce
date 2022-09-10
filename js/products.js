@@ -132,6 +132,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
+        minCount = "";
+        maxCount = "";
 
         showProductList();
     });
