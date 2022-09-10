@@ -43,6 +43,13 @@ function sortProducts(criteria, array){
 
 
 
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
+
+
+
 // Funcion que selecciona y muestra solo aquellos productos del array que contienen la clave y estan dentro de los limites
 function showProductList(){
     let htmlContentToAppend = "";
@@ -55,7 +62,7 @@ function showProductList(){
              (prod.description.toLowerCase().includes(clave.toLowerCase())))) {
 
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+            <div onclick="setProdID(` + prod.id + `)" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + prod.image + `" alt="product image" class="img-thumbnail">
