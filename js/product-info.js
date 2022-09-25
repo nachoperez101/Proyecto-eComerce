@@ -1,5 +1,6 @@
 document.getElementById('usuario').innerHTML = localStorage.getItem('usuario');
 const URL_PRODUCT_INFO = PRODUCT_INFO_URL + localStorage.getItem('prodID') + '.json'
+const URL_PRODUCT_COMMENTS = PRODUCT_INFO_COMMENTS_URL + localStorage.getItem('prodID') + '.json'
 
 
 function showProduct() {
@@ -14,12 +15,38 @@ function showProduct() {
         </div>`
     }
 
+
+    let commentToAppend = '';
+    for (let j = 0; j < comments.length; j++) {
+
+        let stars = '';
+        for (let k = 0; k < comments[j].score; k++) {
+            stars += `<span class="fa fa-star checked"></span>
+            `
+        }
+        for (let k = 0; k < 5-comments[j].score; k++) {
+            stars += `<span class="far fa-star"></span>
+            `
+        }
+        commentToAppend += `
+        <li class="list-group-item" style="margin-bottom: 1px;">
+            <p style="margin: -1px">
+                <span class="fw-bold">${comments[j].user}</span> - ${comments[j].dateTime} - ${stars}
+            </p>
+            <p style="margin: -1px">
+                ${comments[j].description}
+            </p>
+        </li>`
+        
+    }
+
     document.getElementById('titulo').innerHTML = product.name;
     document.getElementById('precio').innerHTML = product.currency + product.cost.toString();
     document.getElementById('descripcion').innerHTML = product.description;
     document.getElementById('categoria').innerHTML = product.category;
     document.getElementById('cantidad').innerHTML = product.soldCount.toString();
     document.getElementById('img').innerHTML = contentToAppend;
+    document.getElementById('lista_comentarios').innerHTML = commentToAppend;
 }
 
 
@@ -36,6 +63,14 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === "ok")
         {
             product = resultObj.data;
+            showProduct();
+        }
+    });
+
+    getJSONData(URL_PRODUCT_COMMENTS).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            comments = resultObj.data;
             showProduct();
         }
     });
