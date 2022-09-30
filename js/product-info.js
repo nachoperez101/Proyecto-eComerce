@@ -49,7 +49,21 @@ function showProduct() {
     document.getElementById('lista_comentarios').innerHTML = commentToAppend;
 }
 
-
+function addComment() {
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;
+    let comentario = {
+        product: parseInt(localStorage.getItem('prodID')),
+        score: parseInt(document.getElementById('puntos').value),
+        description: document.getElementById('opinion').value,
+        user: localStorage.getItem('usuario'),
+        dateTime: dateTime
+    }
+    comments.push(comentario);
+    showProduct();
+}
 
 
 
