@@ -40,6 +40,18 @@ function showProduct() {
         
     }
 
+    let relacionados = ''
+    for (let i = 0; i < product.relatedProducts.length; i++) {
+        relacionados += `
+        <div class="card" style="width: 18rem;" onclick="changeProd(${product.relatedProducts[i].id})">
+            <img class="card-img-top" src="${product.relatedProducts[i].image}">
+            <div class="card-body">
+                <h5 class="card-title">${product.relatedProducts[i].name}</h5>
+            </div>
+        </div>
+        `
+    }
+
     document.getElementById('titulo').innerHTML = product.name;
     document.getElementById('precio').innerHTML = product.currency + product.cost.toString();
     document.getElementById('descripcion').innerHTML = product.description;
@@ -47,6 +59,7 @@ function showProduct() {
     document.getElementById('cantidad').innerHTML = product.soldCount.toString();
     document.getElementById('img').innerHTML = contentToAppend;
     document.getElementById('lista_comentarios').innerHTML = commentToAppend;
+    document.getElementById('rel').innerHTML = relacionados;
 }
 
 function addComment() {
@@ -65,7 +78,10 @@ function addComment() {
     showProduct();
 }
 
-
+function changeProd(id) {
+    localStorage.setItem('prodID', id);
+    window.location = "product-info.html";
+}
 
 
 
