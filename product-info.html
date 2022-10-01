@@ -79,9 +79,18 @@
         <br>
         <div style="margin-top: -1%;">
           <h6 class="fw-bold">Imágenes ilustrativas</h6>
-        </div>
-        <div id="img" class="row">
-        </div>
+          <div id="carouselExampleControls" style="width: 50%;" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carousel" style="padding: 0% 10%;">
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
       </div>
       <hr>
       <div id="comentarios" style="padding-top: 1%;">
@@ -104,8 +113,7 @@
         <button type="button" class="btn btn-primary" onclick="addComment()">Enviar</button>
         
       </div>
-      <br>
-      <hr>
+      <hr style="margin-top: 5%;">
       <div id="relacionados" style="padding-top: 1%;">
         <h5>Productos relacionados</h5>
         <div id="rel" class="row">

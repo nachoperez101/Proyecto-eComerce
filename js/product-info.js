@@ -7,13 +7,25 @@ function showProduct() {
 
     let contentToAppend = ''
     for (let i = 0; i < product.images.length; i++) {
-        contentToAppend += `
-        <div class="col">
+        if (i == 0) {
+            contentToAppend += `
+            <div class="carousel-item active">
+                    <img src="${product.images[i]}" class="d-block w-100">
+            </div>`
+        }
+        else {
+            contentToAppend += `
+            <div class="carousel-item">
+                    <img src="${product.images[i]}" class="d-block w-100">
+            </div>`
+        }
+        {/* <div class="col">
             <div class="img-thumbnail">
-                <img src="${product.images[i]}" style="width:100%">
+                <img src="" style="width:100%">
             </div>
-        </div>`
+        </div> */}
     }
+
 
 
     let commentToAppend = '';
@@ -57,7 +69,7 @@ function showProduct() {
     document.getElementById('descripcion').innerHTML = product.description;
     document.getElementById('categoria').innerHTML = product.category;
     document.getElementById('cantidad').innerHTML = product.soldCount.toString();
-    document.getElementById('img').innerHTML = contentToAppend;
+    document.getElementById('carousel').innerHTML = contentToAppend;
     document.getElementById('lista_comentarios').innerHTML = commentToAppend;
     document.getElementById('rel').innerHTML = relacionados;
 }
