@@ -19,11 +19,6 @@ function showProduct() {
                     <img src="${product.images[i]}" class="d-block w-100">
             </div>`
         }
-        {/* <div class="col">
-            <div class="img-thumbnail">
-                <img src="" style="width:100%">
-            </div>
-        </div> */}
     }
 
 
