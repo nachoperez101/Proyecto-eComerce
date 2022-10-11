@@ -8,7 +8,7 @@ function showCart() {
     for (let i = 0; i < cart.articles.length; i++) {
         contentToAppend += `
         <tr style="margin-right: 10%;">
-          <th scope="row" ><img style="width: 50%;" src="${cart.articles[i].image}"></th>
+          <th scope="row" ><img style="width: 70%;" src="${cart.articles[i].image}"></th>
           <td>${cart.articles[i].name}</td>
           <td>${cart.articles[i].currency} ${cart.articles[i].unitCost}</td>
           <td><input type="number" id="cantidad${i}" value="${cart.articles[i].count}" style="width: 25%;" oninput="updatePrice(${i})" min="0"></td>
