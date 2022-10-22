@@ -90,7 +90,36 @@ function changeProd(id) {
     window.location = "product-info.html";
 }
 
+async function agregarAlCarrito() {
 
+    let elemento = {
+        count: 1,
+        currency: product.currency,
+        id: product.id,
+        image: product.images[0],
+        name: product.name,
+        unitCost: product.cost
+    }
+    if (localStorage.getItem('listaCarrito') == null) {
+        localStorage.setItem('listaCarrito', JSON.stringify([elemento]));
+    }
+    else {
+        let array = JSON.parse(localStorage.getItem('listaCarrito'));
+        let index;
+        for (index = 0; index < array.length; index++) {
+            if (array[index].id == product.id) {
+                break
+            }
+        }
+        if (index == array.length) {
+            array.push(elemento);
+        } else {
+            array[index].count++
+        }
+        localStorage.setItem('listaCarrito', JSON.stringify(array))
+    }
+    window.location = "cart.html"
+}
 
 
 
@@ -100,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === "ok")
         {
             product = resultObj.data;
-            showProduct();
         }
     });
 
