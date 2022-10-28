@@ -5,7 +5,6 @@ const inputCantidad = document.getElementById("cantidad")
 
 function showCart() {
     let cart = JSON.parse(localStorage.getItem('listaCarrito'))
-    console.log(cart);
     let contentToAppend = '';
     for (let i = 0; i < cart.length; i++) {
         contentToAppend += `
@@ -18,6 +17,7 @@ function showCart() {
         </tr>`
     }
     document.getElementById("tbody").innerHTML = contentToAppend;
+    updateTotales();
 }
 
 function updatePrice(index){
@@ -33,6 +33,31 @@ function updatePrice(index){
         localStorage.setItem('listaCarrito', JSON.stringify(cart))
         document.getElementById("subT" + i).innerHTML = `Ingrese cantidad positiva`
     }
+    updateTotales();
+}
+
+function updateTotales() {
+    let cart = JSON.parse(localStorage.getItem('listaCarrito'))
+    let subTotal = 0;
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].currency == 'USD') {
+            subTotal += cart[i].count * cart[i].unitCost;
+        } else{
+            subTotal += cart[i].count * cart[i].unitCost / 41;
+        }
+    }
+    let btnRadio = document.getElementsByName("tipoEnvio");
+    let envio = 0
+    for(i = 0; i < btnRadio.length; i++) {
+        if(btnRadio[i].checked){
+            envio = subTotal / 100 * btnRadio[i].value;
+        }
+    }
+
+    document.getElementById("subTotal").innerHTML = Math.round(subTotal);
+    document.getElementById("envio").innerHTML = Math.round(envio);
+    document.getElementById("total").innerHTML = Math.round(subTotal + envio);
+    
 }
 
 
