@@ -117,6 +117,70 @@
             <h5>Total($) <span style="float: right; font-weight: bold;" id="total"></span></h5>
           </li>
         </ul>
+        <hr>
+        <h2>Forma de pago</h2>
+        
+        <a data-bs-toggle="modal" data-target="#modalFormaPago" href="#modalFormaPago" id="linkFormaPago">Seleccionar</a>
+        <p id="txtFormaPago" style="font-weight: lighter;">No ha seleccionado.</p>
+        
+        <div class="modal fade" id="modalFormaPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="exampleModalLongTitle">Forma de pago</h5>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <input type="radio" id="tarjeta" name="formaPago" onchange="desactivarFormaPago()">
+                  <label for="tarjeta">Tarjeta de crédito</label>
+                </div>
+                <hr>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div class="form-outline">
+                      <label class="form-label" for="numTarjeta">Número de tarjeta</label>
+                      <input type="text" id="numTarjeta" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <label class="form-label" for="codigoSeg">Código de seg.</label>
+                      <input type="text" id="codigoSeg" class="form-control" disabled style="width: 65%;">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="vencimiento">Vencimiento (MM/AA)</label>
+                      <input type="text" id="vencimiento" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <div>
+                  <input type="radio" id="transferencia" name="formaPago" onchange="desactivarFormaPago()">
+                  <label for="transferencia">Transferencia bancaria</label>
+                </div>
+                <hr>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="numCuenta">Número de cuenta</label>
+                      <input type="text" id="numCuenta" class="form-control" disabled>
+                    </div>
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div>
           <button type="button" class="btn btn-danger" onclick="localStorage.removeItem('listaCarrito'); location.reload()">Reiniciar carrito</button>
         </div>

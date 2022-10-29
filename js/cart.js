@@ -60,6 +60,24 @@ function updateTotales() {
     
 }
 
+function desactivarFormaPago() {
+    document.getElementById("txtFormaPago").innerHTML = 'No ha seleccionado.'
+    document.getElementById("linkFormaPago").innerHTML = 'Modificar'
+    if (document.getElementById('tarjeta').checked) {
+        document.getElementById('numTarjeta').disabled = false;
+        document.getElementById('codigoSeg').disabled = false;
+        document.getElementById('vencimiento').disabled = false;
+        document.getElementById('numCuenta').disabled = true;
+        document.getElementById("txtFormaPago").innerHTML = 'Tarjeta de crédito.'
+    } else {
+        document.getElementById('numTarjeta').disabled = true;
+        document.getElementById('codigoSeg').disabled = true;
+        document.getElementById('vencimiento').disabled = true;
+        document.getElementById('numCuenta').disabled = false;
+        document.getElementById("txtFormaPago").innerHTML = 'Transferencia bancaria.'
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(URL_CART_INFO).then(function(resultObj){
