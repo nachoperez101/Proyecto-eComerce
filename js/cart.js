@@ -1,6 +1,7 @@
 document.getElementById('usuario').innerHTML = localStorage.getItem('usuario')
 const URL_CART_INFO = `https://japceibal.github.io/emercado-api/user_cart/25801.json`
 const inputCantidad = document.getElementById("cantidad")
+let TiempoReal = false
 
 
 function showCart() {
@@ -12,7 +13,7 @@ function showCart() {
           <th scope="row" ><img style="width: 70%;" src="${cart[i].image}"></th>
           <td>${cart[i].name}</td>
           <td>${cart[i].currency} ${cart[i].unitCost}</td>
-          <td><input type="number" id="cantidad${i}" value="${cart[i].count}" style="width: 25%;" oninput="updatePrice(${i})" min="0"></td>
+          <td><input type="number" id="cantidad${i}" value="${cart[i].count}" style="width: 25%;" oninput="updatePrice(${i})" min="1"></td>
           <td id="subT${i}">${cart[i].currency} ${cart[i].count * cart[i].unitCost}</td>
         </tr>`
     }
@@ -24,14 +25,14 @@ function updatePrice(index){
     let i = index.toString()
     let cart = JSON.parse(localStorage.getItem('listaCarrito'))
     let cant = document.getElementById("cantidad" + i).value
-    if (cant >= 0) {
+    if (cant >= 1) {
         document.getElementById("subT" + i).innerHTML = `${cart[i].currency} ${cant * cart[i].unitCost}`
         cart[i].count = cant;
         localStorage.setItem('listaCarrito', JSON.stringify(cart))
     } else {
-        cart[i].count = 0;
+        cart[i].count = 1;
         localStorage.setItem('listaCarrito', JSON.stringify(cart))
-        document.getElementById("subT" + i).innerHTML = `Ingrese cantidad positiva`
+        document.getElementById("subT" + i).innerHTML = `Ingrese cantidad mayor o igual a 1`
     }
     updateTotales();
 }
@@ -61,7 +62,6 @@ function updateTotales() {
 }
 
 function desactivarFormaPago() {
-    document.getElementById("txtFormaPago").innerHTML = 'No ha seleccionado.'
     document.getElementById("linkFormaPago").innerHTML = 'Modificar'
     if (document.getElementById('tarjeta').checked) {
         document.getElementById('numTarjeta').disabled = false;
@@ -76,6 +76,20 @@ function desactivarFormaPago() {
         document.getElementById('numCuenta').disabled = false;
         document.getElementById("txtFormaPago").innerHTML = 'Transferencia bancaria.'
     }
+}
+
+function validarForm() {
+    document.getElementById('formEnvio').classList.add('was-validated')
+    if (!(document.getElementById('tarjeta').checkValidity() &&
+          document.getElementById('numTarjeta').checkValidity() &&
+          document.getElementById('codigoSeg').checkValidity() &&
+          document.getElementById('vencimiento').checkValidity() &&
+          document.getElementById('numCuenta').checkValidity())) {
+        document.getElementById('msjErrorFormaPago').innerHTML = 'Ingrese forma de pago'
+    } else {
+        document.getElementById('msjErrorFormaPago').innerHTML = ''
+    }
+    TiempoReal = true
 }
 
 

@@ -63,124 +63,137 @@
         </table>
         <hr>
       </div>
-      <div class="container mx-5" id="formEnvio">
-        <h2>Tipo de envío</h2>
-        <div>
-          <input type="radio" id="premium" name="tipoEnvio" value="15" onchange="updateTotales()" checked>
-          <label for="premium">Premium 2 a 5 días (15%)</label>
-        </div>
-        <div>
-          <input type="radio" id="express" name="tipoEnvio" value="7" onchange="updateTotales()">
-          <label for="express">Express 5 a 8 días (7%)</label>
-        </div>
-        <div>
-          <input type="radio" id="standard" name="tipoEnvio" value="5" onchange="updateTotales()">
-          <label for="standard">Standard 12 a 15 días (5%)</label>
-        </div>
-        <h2 class="my-3">Dirección de envío</h2>
-        <div class="row mb-3">
-          <div class="col">
-            <div class="form-outline">
-              <label class="form-label" for="calle">Calle</label>
-              <input type="text" id="calle" class="form-control" />
-            </div>
+      <div class="container mx-5">
+        <form id="formEnvio" class="needs-validation" onsubmit="alert('¡Has comprado con éxito!'); localStorage.removeItem('listaCarrito'); location.reload()">
+          <h2>Tipo de envío</h2>
+          <div>
+            <input type="radio" id="premium" name="tipoEnvio" value="15" onchange="updateTotales()" checked>
+            <label for="premium">Premium 2 a 5 días (15%)</label>
           </div>
-          <div class="col">
-            <div class="form-outline">
-              <label class="form-label" for="numero">Número</label>
-              <input type="text" id="numero" class="form-control" style="width: 65%;"/>
-            </div>
+          <div>
+            <input type="radio" id="express" name="tipoEnvio" value="7" onchange="updateTotales()">
+            <label for="express">Express 5 a 8 días (7%)</label>
           </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col">
-            <div class="form-outline mb-4">
-              <label class="form-label" for="esquina">Esquina</label>
-              <input type="text" id="esquina" class="form-control"/>
-            </div>
+          <div>
+            <input type="radio" id="standard" name="tipoEnvio" value="5" onchange="updateTotales()">
+            <label for="standard">Standard 12 a 15 días (5%)</label>
           </div>
-          <div class="col">
-          </div>
-        </div>
-        <hr>
-        <h2>Costos</h2>
-        <ul class="list-group">
-          <li class="list-group-item" style="margin-bottom: 1px;">
-            <h5>Subtotal <span style="float: right;" id="subTotal"></span></h5>
-            <p style="margin: -1px;">Costo unitario del producto por cantidad</p>
-          </li>
-          <li class="list-group-item" style="margin-bottom: 1px;">
-            <h5>Costo de envío <span style="float: right;" id="envio"></span></h5>
-            <p style="margin: -1px;">Según el tipo de envío</p>
-          </li>
-          <li class="list-group-item" style="margin-bottom: 1px;">
-            <h5>Total($) <span style="float: right; font-weight: bold;" id="total"></span></h5>
-          </li>
-        </ul>
-        <hr>
-        <h2>Forma de pago</h2>
-        
-        <a data-bs-toggle="modal" data-target="#modalFormaPago" href="#modalFormaPago" id="linkFormaPago">Seleccionar</a>
-        <p id="txtFormaPago" style="font-weight: lighter;">No ha seleccionado.</p>
-        
-        <div class="modal fade" id="modalFormaPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="exampleModalLongTitle">Forma de pago</h5>
-              </div>
-              <div class="modal-body">
-                <div>
-                  <input type="radio" id="tarjeta" name="formaPago" onchange="desactivarFormaPago()">
-                  <label for="tarjeta">Tarjeta de crédito</label>
-                </div>
-                <hr>
-                <div class="row mb-3">
-                  <div class="col">
-                    <div class="form-outline">
-                      <label class="form-label" for="numTarjeta">Número de tarjeta</label>
-                      <input type="text" id="numTarjeta" class="form-control" disabled>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <label class="form-label" for="codigoSeg">Código de seg.</label>
-                      <input type="text" id="codigoSeg" class="form-control" disabled style="width: 65%;">
-                    </div>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <div class="form-outline mb-4">
-                      <label class="form-label" for="vencimiento">Vencimiento (MM/AA)</label>
-                      <input type="text" id="vencimiento" class="form-control" disabled>
-                    </div>
-                  </div>
-                  <div class="col">
-                  </div>
-                </div>
-                <div>
-                  <input type="radio" id="transferencia" name="formaPago" onchange="desactivarFormaPago()">
-                  <label for="transferencia">Transferencia bancaria</label>
-                </div>
-                <hr>
-                <div class="row mb-3">
-                  <div class="col">
-                    <div class="form-outline mb-4">
-                      <label class="form-label" for="numCuenta">Número de cuenta</label>
-                      <input type="text" id="numCuenta" class="form-control" disabled>
-                    </div>
-                  </div>
-                  <div class="col">
-                  </div>
+          <h2 class="my-3">Dirección de envío</h2>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="calle">Calle</label>
+                <input type="text" id="calle" class="form-control has-validation" required/>
+                <div class="invalid-feedback">
+                  Ingresa una calle
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="numero">Número</label>
+                <input type="text" id="numero" class="form-control has-validation" style="width: 65%;" required/>
+                <div class="invalid-feedback">
+                  Ingresa un número
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-outline mb-4">
+                <label class="form-label" for="esquina">Esquina</label>
+                <input type="text" id="esquina" class="form-control" required/>
+                <div class="invalid-feedback">
+                  Ingresa una esquina
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <hr>
+          <h2>Costos</h2>
+          <ul class="list-group">
+            <li class="list-group-item" style="margin-bottom: 1px;">
+              <h5>Subtotal <span style="float: right;" id="subTotal"></span></h5>
+              <p style="margin: -1px;">Costo unitario del producto por cantidad</p>
+            </li>
+            <li class="list-group-item" style="margin-bottom: 1px;">
+              <h5>Costo de envío <span style="float: right;" id="envio"></span></h5>
+              <p style="margin: -1px;">Según el tipo de envío</p>
+            </li>
+            <li class="list-group-item" style="margin-bottom: 1px;">
+              <h5>Total($) <span style="float: right; font-weight: bold;" id="total"></span></h5>
+            </li>
+          </ul>
+          <hr>
+          <h2>Forma de pago</h2>
+          
+          <a data-bs-toggle="modal" data-target="#modalFormaPago" href="#modalFormaPago" id="linkFormaPago">Seleccionar</a>
+          <p id="txtFormaPago" style="font-weight: lighter;">No ha seleccionado.</p>
+          <p class="text-danger" style="margin-top: -2%;" id="msjErrorFormaPago"></p>
+          
+          <div class="modal fade" id="modalFormaPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fw-bold" id="exampleModalLongTitle">Forma de pago</h5>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <input type="radio" id="tarjeta" name="formaPago" onchange="desactivarFormaPago()" required>
+                    <label for="tarjeta">Tarjeta de crédito</label>
+                  </div>
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <div class="form-outline">
+                        <label class="form-label" for="numTarjeta">Número de tarjeta</label>
+                        <input type="text" id="numTarjeta" class="form-control" disabled required>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-outline">
+                        <label class="form-label" for="codigoSeg">Código de seg.</label>
+                        <input type="text" id="codigoSeg" class="form-control" disabled required style="width: 65%;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="vencimiento">Vencimiento (MM/AA)</label>
+                        <input type="text" id="vencimiento" class="form-control" disabled required>
+                      </div>
+                    </div>
+                    <div class="col">
+                    </div>
+                  </div>
+                  <div>
+                    <input type="radio" id="transferencia" name="formaPago" onchange="desactivarFormaPago()" required>
+                    <label for="transferencia">Transferencia bancaria</label>
+                  </div>
+                  <hr>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="numCuenta">Número de cuenta</label>
+                        <input type="text" id="numCuenta" class="form-control" disabled required>
+                      </div>
+                    </div>
+                    <div class="col">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="if (TiempoReal) {validarForm()}">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="validarForm()">Finalizar compra</button>
+        </form>
         <div>
           <button type="button" class="btn btn-danger" onclick="localStorage.removeItem('listaCarrito'); location.reload()">Reiniciar carrito</button>
         </div>
