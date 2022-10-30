@@ -14,7 +14,8 @@ function showCart() {
           <td>${cart[i].name}</td>
           <td>${cart[i].currency} ${cart[i].unitCost}</td>
           <td><input type="number" id="cantidad${i}" value="${cart[i].count}" style="width: 25%;" oninput="updatePrice(${i})" min="1"></td>
-          <td id="subT${i}">${cart[i].currency} ${cart[i].count * cart[i].unitCost}</td>
+          <td><b id="subT${i}">${cart[i].currency} ${cart[i].count * cart[i].unitCost}</b></td>
+          <td><button class="btn btn-sm btn-outline-danger rounded-1" type="button" title="Delete" onclick="eliminarElem(${i})"><i class="fa fa-trash-alt"></i></button></td>
         </tr>`
     }
     document.getElementById("tbody").innerHTML = contentToAppend;
@@ -35,6 +36,13 @@ function updatePrice(index){
         document.getElementById("subT" + i).innerHTML = `Ingrese cantidad mayor o igual a 1`
     }
     updateTotales();
+}
+
+function eliminarElem(i) {
+    let cart = JSON.parse(localStorage.getItem('listaCarrito'));
+    cart.splice(i, 1);
+    localStorage.setItem('listaCarrito', JSON.stringify(cart));
+    showCart();
 }
 
 function updateTotales() {
@@ -92,6 +100,11 @@ function validarForm() {
     TiempoReal = true
 }
 
+function completeSubmit() {
+    alert('¡Has comprado con éxito!'); 
+    localStorage.setItem('listaCarrito', ''); 
+    window.location.href = 'main-page.html';
+}
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(URL_CART_INFO).then(function(resultObj){

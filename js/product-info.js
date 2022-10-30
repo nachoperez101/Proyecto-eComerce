@@ -100,7 +100,7 @@ async function agregarAlCarrito() {
         name: product.name,
         unitCost: product.cost
     }
-    if (localStorage.getItem('listaCarrito') == null) {
+    if (localStorage.getItem('listaCarrito') == null || localStorage.getItem('listaCarrito') == '') {
         localStorage.setItem('listaCarrito', JSON.stringify([elemento]));
     }
     else {
