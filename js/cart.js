@@ -4,6 +4,14 @@ const inputCantidad = document.getElementById("cantidad")
 let TiempoReal = false
 
 
+
+/*
+|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
+| Funciones para el carrito |
+|___________________________|
+*/
+
+//Muestra los elementos del carrito
 function showCart() {
     let cart = JSON.parse(localStorage.getItem('listaCarrito'))
     let contentToAppend = '';
@@ -22,6 +30,7 @@ function showCart() {
     updateTotales();
 }
 
+//Actualiza el subtotal en cada elemento
 function updatePrice(index){
     let i = index.toString()
     let cart = JSON.parse(localStorage.getItem('listaCarrito'))
@@ -38,6 +47,7 @@ function updatePrice(index){
     updateTotales();
 }
 
+//Elimina un elemento del carrito
 function eliminarElem(i) {
     let cart = JSON.parse(localStorage.getItem('listaCarrito'));
     cart.splice(i, 1);
@@ -45,6 +55,16 @@ function eliminarElem(i) {
     showCart();
 }
 
+
+
+
+/*
+|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
+| Funciones para el precio total |
+|________________________________|
+*/
+
+//Actualiza en tiempo real el subtotal, el costo de envio y el precio total de la compra
 function updateTotales() {
     let cart = JSON.parse(localStorage.getItem('listaCarrito'))
     let subTotal = 0;
@@ -69,6 +89,16 @@ function updateTotales() {
     
 }
 
+
+
+
+/*
+|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
+| Funciones de control del submit |
+|_________________________________|
+*/
+
+//Habilita y deshabilita los campos para ingresar informacion de pago según el método seleccionado
 function desactivarFormaPago() {
     document.getElementById("linkFormaPago").innerHTML = 'Modificar'
     if (document.getElementById('tarjeta').checked) {
@@ -86,7 +116,8 @@ function desactivarFormaPago() {
     }
 }
 
-function validarForm() {
+//Muestra un error si hay un campo habilitado y vacío en la forma de pago
+function validarFormaPago() {
     document.getElementById('formEnvio').classList.add('was-validated')
     if (!(document.getElementById('tarjeta').checkValidity() &&
           document.getElementById('numTarjeta').checkValidity() &&
@@ -100,11 +131,14 @@ function validarForm() {
     TiempoReal = true
 }
 
+//Da un mensaje cuando se hace el submit, borra el carrito y redirige a la página principal
 function completeSubmit() {
     alert('¡Has comprado con éxito!'); 
     localStorage.setItem('listaCarrito', ''); 
     window.location.href = 'main-page.html';
 }
+
+
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(URL_CART_INFO).then(function(resultObj){
