@@ -83,9 +83,9 @@ function updateTotales() {
         }
     }
 
-    document.getElementById("subTotal").innerHTML = Math.round(subTotal);
-    document.getElementById("envio").innerHTML = Math.round(envio);
-    document.getElementById("total").innerHTML = Math.round(subTotal + envio);
+    document.getElementById("subTotal").innerHTML = `USD ${Math.round(subTotal)}`;
+    document.getElementById("envio").innerHTML = `USD ${Math.round(envio)}`;
+    document.getElementById("total").innerHTML = `USD ${Math.round(subTotal + envio)}`;
     
 }
 
