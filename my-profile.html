@@ -49,7 +49,7 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-              <li><a class="dropdown-item" href="index.html" onclick="localStorage.setItem('usuario', '')">Cerrar sesión</a></li>
+              <li><a class="dropdown-item" href="index.html" onclick="cerrarSesion()">Cerrar sesión</a></li>
             </ul>
           </li>
         </ul>
@@ -57,9 +57,66 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container w-75">
+      <div class="container m-5" id="main-profile">
+        <h1>Perfil</h1>
+        <br>
+        <hr>
+        <form id="formPerfil" class="needs-validation" onsubmit="completeSubmit()">
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="primerNombre">Primer nombre *</label>
+                <input type="text" id="primerNombre" class="form-control" required/>
+                <div class="invalid-feedback">
+                  Ingrese su nombre
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="segundoNombre">Segundo nombre</label>
+                <input type="text" id="segundoNombre" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="primerApellido">Primer apellido *</label>
+                <input type="text" id="primerApellido" class="form-control has-validation" required/>
+                <div class="invalid-feedback">
+                  Ingrese su apellido
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="segundoApellido">Segundo apellido</label>
+                <input type="text" id="segundoApellido" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="eMail">E-mail</label>
+                <input type="email" id="eMail" class="form-control"/>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="telefonoContacto">Teléfono de contacto *</label>
+                <input type="text" id="telefonoContacto" class="form-control has-validation" required/>
+                <div class="invalid-feedback">
+                  Ingrese un número
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <button type="submit" class="btn btn-block btn-primary">Guardar cambios</button>
+        </form>
       </div>
     </div>
   </main>
