@@ -1,11 +1,15 @@
 document.getElementById('usuario').innerHTML = localStorage.getItem('usuario');
 const URL_PRODUCT_INFO = PRODUCT_INFO_URL + localStorage.getItem('prodID') + '.json'
 const URL_PRODUCT_COMMENTS = PRODUCT_INFO_COMMENTS_URL + localStorage.getItem('prodID') + '.json'
+let product = 0;
 
 
 function showProduct() {
 
     let contentToAppend = ''
+    if (product == 0) {
+        location.reload();
+    }
     for (let i = 0; i < product.images.length; i++) {
         if (i == 0) {
             contentToAppend += `
@@ -124,7 +128,7 @@ async function agregarAlCarrito() {
 
 
 
-document.addEventListener("DOMContentLoaded", function(e){
+document.addEventListener("DOMContentLoaded", function(){
     getJSONData(URL_PRODUCT_INFO).then(function(resultObj){
         if (resultObj.status === "ok")
         {
