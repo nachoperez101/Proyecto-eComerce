@@ -59,7 +59,14 @@
   <main>
     <div class="container w-75">
       <div class="container m-5" id="main-profile">
-        <h1>Perfil</h1>
+        <div class="row">
+          <div class="col">
+            <h1>Perfil</h1>
+          </div>
+          <div >
+            <img id="imgPerfil" src="/img/img_perfil.png" alt="example placeholder" class="img-thumbnail" style="width: 10%; float: right;" />
+          </div>
+      </div>
         <br>
         <hr>
         <form id="formPerfil" class="needs-validation" onsubmit="completeSubmit()">
@@ -106,12 +113,23 @@
             </div>
             <div class="col">
               <div class="form-outline">
+                <label class="form-label" for="inputImgPerfil">Imagen de perfil</label>
+                <input type="file" accept="image/*" id="inputImgPerfil" class="form-control" oninput="updateImgPerfil()"/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-outline">
                 <label class="form-label" for="telefonoContacto">Teléfono de contacto *</label>
                 <input type="text" id="telefonoContacto" class="form-control has-validation" required/>
                 <div class="invalid-feedback">
                   Ingrese un número
                 </div>
               </div>
+            </div>
+            <div class="col">
+
             </div>
           </div>
           <hr>
@@ -125,9 +143,6 @@
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-        2022</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
   <script src="js/bootstrap.bundle.min.js"></script>
