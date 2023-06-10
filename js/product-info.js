@@ -8,6 +8,7 @@ function showProduct() {
 
     let contentToAppend = ''
     if (product == 0) {
+        console.log("error");
         location.reload();
     }
     for (let i = 0; i < product.images.length; i++) {
